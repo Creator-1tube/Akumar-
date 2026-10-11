@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f7ff">
+  <title>WebToAPK — Convert Website to Android APK</title>
+  <style>
+    :root{--ink:#12264a;--muted:#61718d;--blue:#2778f6;--purple:#6452ee;--line:#e2e9f7}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#fff}
+    a{color:inherit;text-decoration:none}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;max-width:1180px;padding:0 24px;margin:auto}
+    .brand{display:flex;gap:12px;align-items:center;font-size:22px;font-weight:850;letter-spacing:-.6px}.logo{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,#2492ff,#6c4cf3);color:white;display:grid;place-items:center;font-size:23px}
+    .brand small{display:block;font-size:11px;font-weight:500;letter-spacing:0;color:#647693;margin-top:1px}.navlinks{display:flex;gap:30px;color:#3d4f6e;font-size:14px}.navlinks a:hover{color:var(--blue)}
+    .navbtn,.primary{background:linear-gradient(110deg,#2e80f9,#6c4ced);color:white;border:0;border-radius:10px;padding:13px 20px;font-weight:750;cursor:pointer;box-shadow:0 7px 18px #4e65ed25}
+    .hero{background:radial-gradient(ellipse at 85% 25%,#e9e3ff 0,transparent 35%),radial-gradient(ellipse at 8% 25%,#dff5ff 0,transparent 32%),#f8faff;padding:48px 24px 30px}
+    .hero-inner{max-width:1120px;margin:auto;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:28px;min-height:270px}
+    h1{font-size:clamp(34px,4vw,53px);line-height:1.07;letter-spacing:-1.8px;margin:0 0 18px}.gradient{background:linear-gradient(100deg,#267bf6,#7550ed);background-clip:text;color:transparent}
+    .lead{font-size:17px;line-height:1.65;color:#526481;max-width:520px;margin:0 0 20px}.checks{display:flex;gap:17px;flex-wrap:wrap;color:#435673;font-size:12px}.checks span:before{content:"✓";display:inline-grid;place-items:center;background:#1bb985;color:white;border-radius:50%;width:17px;height:17px;margin-right:6px;font-weight:900}
+    .art{min-height:230px;display:flex;align-items:center;justify-content:center;position:relative}.browser{width:65%;height:190px;background:#fff;border:5px solid #2e65a7;border-radius:15px;transform:rotate(-4deg);padding:15px;box-shadow:0 20px 35px #2d70a72b}.dots{display:flex;gap:5px;margin-bottom:15px}.dots i{width:8px;height:8px;border-radius:50%;background:#ff7e7e}.address{height:24px;border:1px solid #d6e1f2;border-radius:5px;color:#6a7a91;font-size:10px;padding:5px}.mock-img{height:60px;border-radius:7px;background:linear-gradient(120deg,#4da5ff,#6965f3);margin:12px 0}.line{height:8px;background:#e1e8f3;border-radius:8px;margin:8px 0;width:83%}.phone{width:108px;height:206px;border:7px solid #193d6d;border-radius:23px;background:#fff;position:absolute;right:5%;top:20px;padding:22px 8px 10px;transform:rotate(3deg);box-shadow:0 15px 25px #18385c22}.phone:before{content:"";position:absolute;top:7px;left:32px;width:28px;height:5px;border-radius:5px;background:#193d6d}.screenimg{height:70px;border-radius:5px;background:linear-gradient(140deg,#d7eaff,#776cf4)}.apk{position:absolute;right:0;top:0;background:#19b77d;color:white;border-radius:50%;width:66px;height:66px;display:grid;place-items:center;font-size:14px;font-weight:850;box-shadow:0 8px 18px #18aa7b33}
+    .wrap{max-width:1120px;padding:0 24px;margin:auto}.converter{margin-top:-3px;background:white;border:1px solid #e2ebfa;border-radius:18px;padding:25px;box-shadow:0 8px 25px #2a70b10d;position:relative}.formtitle{font-size:23px;font-weight:850;margin:0 0 6px}.sub{color:var(--muted);font-size:14px;margin:0 0 17px}.fields{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:12px}.field label{display:block;font-size:12px;font-weight:750;color:#445673;margin-bottom:7px}.field input{width:100%;height:47px;border:1px solid #d7e0ef;border-radius:9px;padding:0 13px;font:inherit;color:#243856;outline:none}.field input:focus{border-color:#4788fb;box-shadow:0 0 0 3px #4385fa19}.submitrow{display:flex;gap:12px;margin-top:14px}.submitrow .primary{min-width:190px}.note{font-size:12px;color:#72819a;line-height:1.55;margin-top:12px}.status{display:none;margin-top:16px;padding:13px 15px;border-radius:10px;background:#f3f7ff;color:#29486f;font-size:14px}.status.show{display:block}.status.error{background:#fff2f2;color:#a52c36}.status a{font-weight:800;text-decoration:underline}.features{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;padding:30px 0 36px;text-align:center}.feature .ico{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin:0 auto 10px;background:#e6f0ff;color:#287cf7;font-size:23px}.feature:nth-child(2) .ico{background:#dcf8eb;color:#1aa778}.feature:nth-child(3) .ico{background:#ece7ff;color:#7453ee}.feature:nth-child(4) .ico{background:#fbe6ff;color:#c14bd9}.feature:nth-child(5) .ico{background:#fff0df;color:#e78a23}.feature b{font-size:14px}.feature p{font-size:12px;line-height:1.5;color:#6a7890;margin:7px auto 0;max-width:170px}
+    .how{background:#f4f8ff;padding:30px 24px 36px}.section-title{text-align:center;font-size:25px;margin:0 0 7px;letter-spacing:-.5px}.section-sub{text-align:center;color:#71809a;font-size:13px;margin:0 0 28px}.steps{max-width:1120px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.step{display:flex;gap:12px;align-items:flex-start}.num{flex:0 0 30px;height:30px;border-radius:50%;background:#337df4;color:white;display:grid;place-items:center;font-weight:800}.step b{font-size:13px}.step p{font-size:11px;color:#6c7b95;line-height:1.5;margin:5px 0}.footer{background:#10284d;color:white;text-align:center;padding:24px}.footer b{font-size:16px}.footer p{font-size:12px;color:#c4d2e9;margin:8px 0 0}
+    @media(max-width:800px){.navlinks{display:none}.hero-inner{grid-template-columns:1fr}.art{display:none}.hero{padding-top:35px}.fields{grid-template-columns:1fr}.submitrow{flex-direction:column}.submitrow .primary{width:100%}.features{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr 1fr}.converter{padding:20px}.nav{height:68px}}
+    @media(max-width:430px){.steps{grid-template-columns:1fr}.checks{gap:9px}.brand{font-size:19px}}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#"><span class="logo">⌘</span><span>WebToAPK<small>Your Website → Android App</small></span></a>
+    <nav class="navlinks"><a href="#home">Home</a><a href="#features">Features</a><a href="#how">How It Works</a><a href="#faq">FAQ</a></nav>
+    <a class="navbtn" href="#convert">Get Started</a>
+  </header>
+  <main>
+    <section class="hero" id="home"><div class="hero-inner">
+      <div><h1>Convert Your Website<br>to <span class="gradient">Android APK</span></h1>
+        <p class="lead">Turn your website into an Android app. Enter your HTTPS website URL, customize the app details, and build an installable APK.</p>
+        <div class="checks"><span>No coding for visitors</span><span>Custom app name</span><span>Download APK</span></div>
+      </div>
+      <div class="art" aria-hidden="true"><div class="browser"><div class="dots"><i></i><i></i><i></i></div><div class="address">https://yourwebsite.com</div><div class="mock-img"></div><div class="line"></div><div class="line"></div><div class="line" style="width:55%"></div></div><div class="phone"><div class="screenimg"></div><div class="line"></div><div class="line"></div><div class="line" style="width:55%"></div></div><div class="apk">ANDROID<br>APK</div></div>
+    </div></section>
+    <div class="wrap">
+      <section class="converter" id="convert">
+        <h2 class="formtitle">↗ Enter Your Website Details</h2>
+        <p class="sub">Your server will build a real debug APK. Use a website you own or have permission to package.</p>
+        <form id="buildForm">
+          <div class="fields">
+            <div class="field"><label for="websiteUrl">Website URL (HTTPS)</label><input id="websiteUrl" name="websiteUrl" type="url" placeholder="https://example.com" required maxlength="2048"></div>
+            <div class="field"><label for="appName">Android app name</label><input id="appName" name="appName" placeholder="My Website" required minlength="2" maxlength="30" value="My Website"></div>
+            <div class="field"><label for="packageName">Package name</label><input id="packageName" name="packageName" value="com.example.mywebsite" required maxlength="150"></div>
+          </div>
+          <div class="submitrow"><button class="primary" id="submitBtn" type="submit">🤖 Convert to APK</button></div>
+          <p class="note">MVP note: builds are unsigned debug APKs, not Play Store-ready releases. Builds require a server with JDK, Android SDK and Gradle installed. Generated files are deleted after about one hour.</p>
+        </form>
+        <div class="status" id="statusBox" role="status" aria-live="polite"></div>
+      </section>
+      <section class="features" id="features">
+        <div class="feature"><div class="ico">ϟ</div><b>Simple workflow</b><p>Enter the website and app details in a few steps.</p></div>
+        <div class="feature"><div class="ico">⬡</div><b>Safer defaults</b><p>HTTPS-only URLs and basic request limits.</p></div>
+        <div class="feature"><div class="ico">▣</div><b>Custom identity</b><p>Choose an app name and package ID.</p></div>
+        <div class="feature"><div class="ico">⇩</div><b>Download APK</b><p>Get the generated debug APK when the build completes.</p></div>
+        <div class="feature"><div class="ico">✓</div><b>Own your code</b><p>Run locally and adapt the project yourself.</p></div>
+      </section>
+    </div>
+    <section class="how" id="how"><h2 class="section-title">How It Works</h2><p class="section-sub">Four steps from website URL to Android APK.</p>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div><b>Enter website URL</b><p>Use a public HTTPS site you own or have permission to package.</p></div></div>
+        <div class="step"><div class="num">2</div><div><b>Customize app</b><p>Set the app name and Android package identifier.</p></div></div>
+        <div class="step"><div class="num">3</div><div><b>Build APK</b><p>The backend creates a WebView project and runs Gradle.</p></div></div>
+        <div class="step"><div class="num">4</div><div><b>Download & install</b><p>Download the APK and install it on a test Android device.</p></div></div>
+      </div>
+    </section>
+    <section class="wrap" id="faq" style="padding-top:32px;padding-bottom:32px"><h2 class="section-title">FAQ</h2><p class="section-sub">This tool wraps a website; it does not turn it into a fully native app.</p><details><summary>Will every website work?</summary><p>Not necessarily. Sites using unsupported browser features, strict login flows, pop-ups or special device APIs may need extra native code.</p></details><details style="margin-top:12px"><summary>Can I publish this APK on Google Play?</summary><p>This starter generates a debug APK. A production release needs a signed release build, a secure signing-key workflow, testing and compliance with current Play policies.</p></details><details style="margin-top:12px"><summary>Can I host this on a static hosting service?</summary><p>No. The UI can be static, but APK generation needs a backend machine with Android build tools installed.</p></details></section>
+  </main>
+  <footer class="footer"><b>Your Website. Your Android App.</b><p>WebToAPK starter project · Test before distributing.</p></footer>
+  <script>
+    const form = document.getElementById("buildForm");
+    const button = document.getElementById("submitBtn");
+    const statusBox = document.getElementById("statusBox");
+    let pollTimer = null;
+
+    function showStatus(message, isError = false, html = false) {
+      statusBox.className = "status show" + (isError ? " error" : "");
+      if (html) statusBox.innerHTML = message;
+      else statusBox.textContent = message;
+    }
+    function validPackageName(value) {
+      return /^[a-z][a-z0-9]*(\.[a-z][a-z0-9]*)+$/i.test(value);
+    }
+    async function pollStatus(id) {
+      try {
+        const response = await fetch(`/api/status/${encodeURIComponent(id)}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Could not read build status.");
+        if (data.status === "completed") {
+          clearInterval(pollTimer);
+          button.disabled = false;
+          button.textContent = "🤖 Convert to APK";
+          showStatus(`Build complete. <a href="${data.downloadUrl}">Download APK</a>`, false, true);
+        } else if (data.status === "failed") {
+          clearInterval(pollTimer);
+          button.disabled = false;
+          button.textContent = "🤖 Convert to APK";
+          showStatus(data.message || "Build failed. Check Android SDK/Gradle setup.", true);
+        } else {
+          showStatus(data.message || "Building APK… This may take several minutes.");
+        }
+      } catch (error) {
+        clearInterval(pollTimer);
+        button.disabled = false;
+        button.textContent = "🤖 Convert to APK";
+        showStatus(error.message, true);
+      }
+    }
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (pollTimer) clearInterval(pollTimer);
+      const websiteUrl = document.getElementById("websiteUrl").value.trim();
+      const appName = document.getElementById("appName").value.trim();
+      const packageName = document.getElementById("packageName").value.trim();
+      try {
+        const url = new URL(websiteUrl);
+        if (url.protocol !== "https:") throw new Error("Please enter an HTTPS URL (https://…).");
+        if (!validPackageName(packageName)) throw new Error("Package name must look like com.example.myapp.");
+      } catch (error) {
+        showStatus(error.message || "Please enter a valid URL.", true);
+        return;
+      }
+      button.disabled = true;
+      button.textContent = "Starting build…";
+      showStatus("Submitting build request…");
+      try {
+        const response = await fetch("/api/build", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ websiteUrl, appName, packageName })
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Could not start build.");
+        showStatus("Build accepted. Preparing Android project…");
+        await pollStatus(data.id);
+        pollTimer = setInterval(() => pollStatus(data.id), 2500);
+      } catch (error) {
+        button.disabled = false;
+        button.textContent = "🤖 Convert to APK";
+        showStatus(error.message, true);
+      }
+    });
+  </script>
+</body>
+</html>

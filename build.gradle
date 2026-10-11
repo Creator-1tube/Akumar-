@@ -1,0 +1,18 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "com.webtoapk.template"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "__PACKAGE_NAME__"
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+        resValue "string", "app_name", "__APP_NAME_XML__"
+        resValue "string", "website_url", "__WEBSITE_URL_XML__"
+    }
+}
